@@ -45,6 +45,13 @@ when 'ubuntu','debian'
     action :upgrade
   end
 
+when 'centos','redhat','fedora'
+  include_recipe 'yum::rbel'
+
+  %w{gecode gecode-devel}.each do |pkg|
+    package pkg
+  end
+
 else
   raise "This recipe does not yet support installing Gecode 3.5.0+ from packages on your platform"
 end
